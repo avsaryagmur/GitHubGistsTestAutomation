@@ -10,8 +10,8 @@ beforeEach(() => {
 
       cy.visit('https://github.com/login');
   
-      cy.get('#login_field').type('ss@gmail.com');
-      cy.get('#password').type('ss*' , {force: true});
+      cy.get('#login_field').type('s@gmail.com');
+      cy.get('#password').type('d*' , {force: true});
   
       cy.get('[name="commit"]').click();
         cy.url().should('include', 'https://github.com/');
@@ -47,11 +47,11 @@ beforeEach(() => {
             currentURL = url
             cy.log("yagmurr: " + currentURL);
             createdGistID = currentURL.split('/')[4];
+            cy.writeFile('cypress/fixtures/gistId.json', { createdGistID , contentNameText , descriptionText}); 
 
             cy.log("createdGistID: " + createdGistID);
 
         });
-        cy.writeFile('cypress/fixtures/gistId.json', { createdGistID , contentNameText , descriptionText}); 
 
     // Check if Gist creation succeeded
         cy.contains("a", `New Secret Gist${randomNumber}`)

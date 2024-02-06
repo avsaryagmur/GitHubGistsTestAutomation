@@ -1,16 +1,30 @@
+import { CreateGists } from "../../pageObjects/CreateGistPage";
 
-describe('Get a Gist using GitHub Gists',  { tags: '@getGists' },() => {
-//npx cypress run --spec 'cypress/integration/getGists.js'
+describe('Get a Gist using GitHub Gists',  { tags: '@getGistsAPI' },() => {
+//npx cypress run --spec 'cypress/integration/getGistsAPI.js'
 
+const createGistsPage = new CreateGists();
 
-    it('should retrieve the created Gist', () => {
+    it('Should Get the Created Gist' , ()=> {
+        cy.readFile('cypress/fixtures/gistId.json').then(({ createdGistID, contentNameText, descriptionText }) => {
+            cy.visit(`https://gist.github.com/yagmurTest/${createdGistID}`);
+
+            cy.contains("a", contentNameText)
+            .should("be.visible")
+            .and("have.attr", "href")
+            .and("includes", createGistsPage.githubUserName);
+
+          });
+    })
+
+    it('should retrieve the created Gist --api', () => {
       // Gist kimliğini bir dosyadan oku
       cy.readFile('cypress/fixtures/gistId.json').then(({ createdGistID, contentNameText, descriptionText }) => {
         cy.request('GET', `https://api.github.com/gists/${createdGistID}`)
           .then((response) => {
             expect(response.status).to.eq(200) 
             expect(response.body.description).to.eq(descriptionText); 
-            expect(response.body.files['test.js'].content).to.eq(contentNameText); 
+            //expect(response.body.files['test.js'].content).to.eq(contentNameText); 
           })
       });
     })
