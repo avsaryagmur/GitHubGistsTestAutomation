@@ -9,3 +9,5 @@ cypress/reports
 
 # downloads
 /cypress/downloads/*
+
+/cypress/fixtures/gistId.json
