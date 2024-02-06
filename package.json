@@ -1,0 +1,18 @@
+{
+  "name": "githubgiststestautomation",
+  "version": "1.0.0",
+  "description": "GitHubGistsCypressTestAutomation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "github",
+    "gists"
+  ],
+  "author": "yagmuravsardilmit",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^13.6.4"
+  }
+}
