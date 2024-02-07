@@ -10,4 +10,9 @@ cypress/reports
 # downloads
 /cypress/downloads/*
 
+#fixture
 /cypress/fixtures/gistId.json
+/cypress/fixtures/gistAPIResponse.json
+
+#env.json
+cypress.env.json

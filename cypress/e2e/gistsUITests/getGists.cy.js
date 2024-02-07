@@ -1,7 +1,7 @@
 import { CreateGists } from "../../pageObjects/CreateGistPage";
 
-describe('Get a Gist using GitHub Gists',  { tags: '@getGistsAPI' },() => {
-//npx cypress run --spec 'cypress/integration/getGistsAPI.js'
+describe('Get a Gist using GitHub Gists',  { tags: '@getGistsUI' },() => {
+//npx cypress run --spec 'cypress/integration/getGistsUI.js'
 
 const createGistsPage = new CreateGists();
 
@@ -24,7 +24,6 @@ const createGistsPage = new CreateGists();
           .then((response) => {
             expect(response.status).to.eq(200) 
             expect(response.body.description).to.eq(descriptionText); 
-            //expect(response.body.files['test.js'].content).to.eq(contentNameText); 
           })
       });
     })
