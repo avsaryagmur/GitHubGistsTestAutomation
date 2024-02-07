@@ -1,4 +1,4 @@
-describe("Create Github Gist by using API", ()=> {
+describe("Create Github Gist by using API",()=> {
  
 const githubAccessToken =  Cypress.env('githubAccessToken');
 const authorization = `Bearer ${githubAccessToken}`;
@@ -65,6 +65,7 @@ it("Should Create a Public Gist Successfully via POST Request", () => {
     headers: {
       authorization,
       'X-GitHub-Api-Version': '2022-11-28',
+      'Accept': 'application/vnd.github+json',
     },
     body: body,
   };
@@ -100,6 +101,7 @@ it("Should Create a Readme.md Gist Successfully via POST Request", () => {
     headers: {
       authorization,
       'X-GitHub-Api-Version': '2022-11-28',
+      'Accept': 'application/vnd.github+json',
     },
     body: body,
   };
@@ -133,6 +135,7 @@ it("422 Validation failed - Should NOT Create a Gist Successfully with Empty Con
     headers: {
       authorization,
       'X-GitHub-Api-Version': '2022-11-28',
+      'Accept': 'application/vnd.github+json',
     },
   //  NOTE: This was considered a failure because the status code was not 2xx or 3xx. 
   //        If you do not want status codes to cause failures pass the option: failOnStatusCode: false
@@ -167,6 +170,7 @@ it("401 Unauthorized failed - Should NOT Create a Gist Successfully For non-auth
     headers: {
       'Authorization': 'Bearer 12345678', 
       'X-GitHub-Api-Version': '2022-11-28',
+      'Accept': 'application/vnd.github+json',
     },
     failOnStatusCode: false , 
     body: body,

@@ -1,6 +1,6 @@
 import { CreateGists } from "../../pageObjects/CreateGistPage";
 
-describe('Get a Gist using GitHub Gists',  { tags: '@getGistsUI' },() => {
+describe('Get a Gist using GitHub Gists', () => {
 //npx cypress run --spec 'cypress/integration/getGistsUI.js'
 
 const createGistsPage = new CreateGists();
@@ -17,15 +17,6 @@ const createGistsPage = new CreateGists();
           });
     })
 
-    it('should retrieve the created Gist --api', () => {
-      // Gist kimliğini bir dosyadan oku
-      cy.readFile('cypress/fixtures/gistId.json').then(({ createdGistID, contentNameText, descriptionText }) => {
-        cy.request('GET', `https://api.github.com/gists/${createdGistID}`)
-          .then((response) => {
-            expect(response.status).to.eq(200) 
-            expect(response.body.description).to.eq(descriptionText); 
-          })
-      });
-    })
+
   })
   

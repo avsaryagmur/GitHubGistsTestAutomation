@@ -1,5 +1,4 @@
-describe("Get Github Gist by using API",  { tags: '@getGistsAPI' }, ()=> {
-    //npx cypress run --spec 'cypress/integration/getGistAPI.js'
+describe("Get Github Gist by using API",  ()=> {
 
     const githubAccessToken =  Cypress.env('githubAccessToken');
     const authorization = `Bearer ${githubAccessToken}`;
@@ -26,7 +25,6 @@ describe("Get Github Gist by using API",  { tags: '@getGistsAPI' }, ()=> {
     })
 
 
-
     it('404 - Should Return Error for Random GistID via POST Request', ()=> {
 
 
@@ -46,4 +44,24 @@ describe("Get Github Gist by using API",  { tags: '@getGistsAPI' }, ()=> {
      })
 
     })
+
+    it('404 - Should Return Error When GistID is Empty via POST Request', ()=> {
+
+
+      const req={
+         method: "GET",
+         url: `https://api.github.com/gists/`,
+         headers: {
+             authorization,
+             'X-GitHub-Api-Version': '2022-11-28',
+             'Accept': 'application/vnd.github+json',
+         },
+         failOnStatusCode: false,
+      }
+ 
+      cy.request(req).then((response) => {
+         expect(response.status).to.eq(404) ;
+      })
+ 
+     })
 })

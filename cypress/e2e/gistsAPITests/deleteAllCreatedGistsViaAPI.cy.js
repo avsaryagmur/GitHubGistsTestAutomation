@@ -1,4 +1,4 @@
-describe("Delete The All My Created Github Gist by using API", ()=> {
+describe("Delete The All My Created Github Gist by using API", { tags: '@deleteAllGistsAPI' }, ()=> {
  
     const githubAccessToken =  Cypress.env('githubAccessToken');
     const authorization = `Bearer ${githubAccessToken}`;
