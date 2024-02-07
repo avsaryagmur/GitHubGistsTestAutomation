@@ -6,20 +6,21 @@ describe('Create GitHub Gists Tests', () => {
     
    const createGistsPage = new CreateGists();
 
-beforeEach(() => {
+  
+      beforeEach(() => {
 
       cy.visit('https://github.com/login');
   
-      cy.get('#login_field').type('s@gmail.com');
-      cy.get('#password').type('d*' , {force: true});
+      cy.get('#login_field').type(Cypress.env('username'));
+      cy.get('#password').type(Cypress.env('password'));
   
       cy.get('[name="commit"]').click();
         cy.url().should('include', 'https://github.com/');
-        cy.visit('https://gist.github.com/');
+        cy.visit('https://gist.github.com');
 
-})
+        })
 
-    it('Should not create a Gist with empty content', () => {
+    it('Should NOT Create a Gist With Empty Content', () => {
 
         cy.contains("button", "Create secret gist").click();
 
@@ -29,7 +30,7 @@ beforeEach(() => {
 
     })
     
-    it.only('Should Create a Secret Gist Successfully', () => {
+    it('Should Create a Secret Gist Successfully', () => {
         let currentURL;
         const randomNumber = Math.floor(Math.random() * 1001); 
         const contentNameText = 'New Secret Gist' + randomNumber;
@@ -45,10 +46,8 @@ beforeEach(() => {
 
         cy.url().then(url => {
             currentURL = url
-            cy.log("yagmurr: " + currentURL);
             createdGistID = currentURL.split('/')[4];
             cy.writeFile('cypress/fixtures/gistId.json', { createdGistID , contentNameText , descriptionText}); 
-
             cy.log("createdGistID: " + createdGistID);
 
         });
@@ -64,12 +63,7 @@ beforeEach(() => {
         "Secret",
         ).should("be.visible");
 
-
-
-      //  cy.get('.btn-danger').click();
-
-  //cy.get('.pagehead-actions button[aria-label="Delete this Gist"]').click();
-  
+      //  cy.get('.btn-danger').click();  
 
     }); 
 
@@ -84,13 +78,13 @@ beforeEach(() => {
         cy.url().should("include", createGistsPage.githubUserName);
 
 
-    // Check if Gist creation succeeded
+       // Check if Gist creation succeeded
         cy.contains("a", `New Public Gist${randomNumber}`)
           .should("be.visible")
           .and("have.attr", "href")
           .and("includes", createGistsPage.githubUserName);
 
-        cy.get('.btn-danger').click();
+      //  cy.get('.btn-danger').click();
   
 
     }); 
@@ -98,14 +92,12 @@ beforeEach(() => {
     it('Should Create a Gist By using Drag and Drop Successfully', ()=> {
         const randomNumber = Math.floor(Math.random() * 1001); 
 
-
-        console.log(randomNumber);
         cy.get(createGistsPage.description).type('YagmurGist' + randomNumber);
         cy.get(createGistsPage.contentName).type('New Drag And Drop Gist' + randomNumber);
         cy.get(createGistsPage.editor).selectFile("cypress/fixtures/text.txt", {action: "drag-drop",});
+        
         cy.get(".CodeMirror-sizer").contains('Drag and Drop Action');
         cy.contains("button", "Create secret gist").click();
-
         cy.url().should("include", createGistsPage.githubUserName);
 
 
@@ -122,7 +114,7 @@ beforeEach(() => {
         ).should("be.visible");
 
         // delete created gist
-        cy.get('.btn-danger').click();
+       // cy.get('.btn-danger').click();
     })
 
   });

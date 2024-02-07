@@ -1,5 +1,5 @@
 # GitHubGistsCypressTestAutomation
-
+These tests simulate typical user interactions with both the Gist UI application and its API.
 
 ### How Can You Create a Cypress Project?
 
@@ -45,13 +45,7 @@
 
 1. Open the terminal and change the current working directory to the location where you want to clone the repository.
 
-2. Clone this repo by running the following command:
-
-`git clone https://github.com/avsaryagmur/CypressAutomation.git`
-
-or
-
-`git clone git@github.com:avsaryagmur/CypressAutomation.git`
+2. Clone this repo to your device.
 
 3. Install home brew (if you prefer):
 
@@ -65,7 +59,9 @@ or
 
 `yarn install`
 
-6. Run all tests interactively:
+6. Create a file named "cypress.env.json" and fill your github credentials such as "cypress.example.env.json"
+
+7. Run all tests interactively:
 
 `yarn cypress`
 

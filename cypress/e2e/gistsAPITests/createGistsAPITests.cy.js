@@ -185,7 +185,6 @@ it("401 Unauthorized failed - Should NOT Create a Gist Successfully For non-auth
 
 })
 
-
 function deleteGistTest(gistId, token) {
 
 
@@ -197,9 +196,9 @@ function deleteGistTest(gistId, token) {
       'Authorization': token, // GitHub API erişim token'ınızı buraya girin
       'X-GitHub-Api-Version': '2022-11-28'
     },
-    failOnStatusCode: false // Başarısız durumlar için testin hata vermesini engelle
+    failOnStatusCode: false //Prevent the test from failing for unsuccessful scenarios.
   }).then(response => {
-    // Başarılı olup olmadığını kontrol et
+    // Check if it is successful.
     if (response.status === 204) {
       cy.log(`Gist with ID ${gistId} is deleted successfully.`);
     } else {
