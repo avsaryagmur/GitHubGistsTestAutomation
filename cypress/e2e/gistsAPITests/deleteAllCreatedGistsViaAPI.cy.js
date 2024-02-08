@@ -19,7 +19,7 @@ describe("Delete The All My Created Github Gist by using API", { tags: '@deleteA
         // Took gists list from response
         const gists = response.body;
     
-        // Her bir gist için DELETE isteği gönder
+        // Send DELETE request for each of gists.
         gists.forEach(gist => {
           cy.request({
             method: 'DELETE',
@@ -27,9 +27,9 @@ describe("Delete The All My Created Github Gist by using API", { tags: '@deleteA
             headers: {
               'Accept': 'application/vnd.github.v3+json',
               'X-GitHub-Api-Version': '2022-11-28',
-              'Authorization': authorization // GitHub API erişim token'ınızı buraya girin
+              'Authorization': authorization // Put your GitHub API access token
             },
-            failOnStatusCode: false // Başarısız durumlar için testin hata vermesini engelle
+            failOnStatusCode: false // Prevent the test from failing for unsuccessful scenarios.
           }).then(deleteResponse => {
             if (deleteResponse.status === 204) {
               cy.log(`Gist with ID ${gist.id} is deleted successfully.`);
