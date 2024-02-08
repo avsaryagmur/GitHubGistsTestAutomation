@@ -1,8 +1,9 @@
 describe("more yagmur - will update", ()=> {
 
   const githubAccessToken = Cypress.env("githubAccessToken");
+  const authorization = `Bearer ${githubAccessToken}`;
 
-  it.skip("List gists for anonymous user", () => {
+  it("List gists for anonymous user", () => {
     cy.request({
       url: "https://api.github.com/gists",
       method: "GET",
@@ -13,7 +14,7 @@ describe("more yagmur - will update", ()=> {
   });
 
 
-    it.skip('Documant - List gists for authenticated user', ()=> {
+    it('Documant - List gists for authenticated user', ()=> {
      // const authorization = `Bearer ${githubAccessToken}`;
       const options = {
         method: "GET",
@@ -30,6 +31,23 @@ describe("more yagmur - will update", ()=> {
       });
     })
   
+
+    it('302 - List gists for authenticated user', ()=> {
+      // const authorization = `Bearer ${githubAccessToken}`;
+       const options = {
+         method: "GET",
+         url: "https://api.github.com/gists",
+         headers: {
+           'Autorization': 'Bearer qwaaaa',
+           'X-GitHub-Api-Version': '2022-11-28',
+         },
+       };
+   
+       cy.request(options).then((res) => {
+         expect(res.status).to.equal(200);
+         expect(res.body).to.not.be.empty;
+       });
+     })
   
     it.skip('Should Get the Created Gist Successfully' , ()=> {
       cy.readFile('cypress/fixtures/gistAPIResponse.json').then(({ createdGistId , createdGistURL, publicFileNameText, descriptionAPIText}) => {

@@ -44,7 +44,39 @@ it("Should Create a Secret Gist Successfully via POST Request", () => {
 
 
 })
+it("Should Create a Gist Successfully with Long Content(10,000 characters) Text via POST Request", () => {
+  const longContent = 'A'.repeat(10000); // Create a string with 10000 characters
+  const body = {
+    description: "Description",
+    public: false,
+    files: {
+      "longContent.md": {
+        content: longContent,
+      },
+    },
+  };
+  const req = {
+    method: "POST",
+    url: "https://api.github.com/gists",
+    headers: {
+      authorization,
+      'X-GitHub-Api-Version': '2022-11-28',
+    },
+    body: body,
+  };
 
+  cy.request(req).then((response) => {
+
+    expect(response.status).to.equal(201);
+    expect(response.body.files["longContent.md"].filename).to.equal("longContent.md");
+
+
+
+   // deleteGistTest(createdGistId, authorization);
+  });
+
+
+})
 it("Should Create a Public Gist Successfully via POST Request", () => {
   const randomNumber = Math.floor(Math.random() * 1001); 
   const publicFileNameText = 'API - New Public Gist' + randomNumber;
@@ -117,7 +149,42 @@ it("Should Create a Readme.md Gist Successfully via POST Request", () => {
 
 
 })
+it("Should Create a Gist with Multi File Successfully via POST Request", () => {
 
+  const body = {
+    description: "Readme.md API automation Test",
+    public: true,
+    files: {
+      "multiFile.md": {
+        content: "This Gist Created by using API Automation",
+      },
+      "secondFile.md": {
+        content: "Second File Created by using API Automation",
+      },
+    },
+  };
+  const req = {
+    method: "POST",
+    url: "https://api.github.com/gists",
+    headers: {
+      authorization,
+      'X-GitHub-Api-Version': '2022-11-28',
+      'Accept': 'application/vnd.github+json',
+    },
+    body: body,
+  };
+
+  cy.request(req).then((response) => {
+    const createdGistId = response.body.id;
+    const createdGistURL = response.body.url;
+
+    expect(response.status).to.equal(201);
+    expect(response.body.files["multiFile.md"].filename).to.equal("multiFile.md");
+  //  deleteGistTest(createdGistId, authorization);
+  });
+
+
+})
 it("422 Validation failed - Should NOT Create a Gist Successfully with Empty Content via POST Request", () => {
 
   const body = {

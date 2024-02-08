@@ -23,7 +23,27 @@ describe("Get Github Gist by using API",  ()=> {
 
     })
     })
+    it('401 Unauthorized failed - Should Return Error for non-authenticated user via POST Request', ()=> {
+      cy.readFile('cypress/fixtures/gistAPIResponse.json').then(({ createdGistId , createdGistURL, publicFileNameText, descriptionAPIText}) => {
 
+
+   const req={
+      method: "GET",
+      url: `https://api.github.com/gists/${createdGistId}`,
+      headers: {
+         'Authorization': 'Bearer 12345678', 
+         'X-GitHub-Api-Version': '2022-11-28',
+          'Accept': 'application/vnd.github+json',
+      },
+      failOnStatusCode: false,
+   }
+
+   cy.request(req).then((response) => {
+      expect(response.status).to.eq(401) ;
+   })
+
+  })
+  })
     it('404 - Should Return Error for Random GistID via POST Request', ()=> {
 
 
@@ -43,7 +63,6 @@ describe("Get Github Gist by using API",  ()=> {
      })
 
     })
-
     it('404 - Should Return Error When GistID is Empty via POST Request', ()=> {
 
 
