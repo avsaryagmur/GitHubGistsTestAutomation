@@ -88,7 +88,31 @@ describe('Create GitHub Gists Tests', () => {
   
 
     }); 
+    it('Should Create a Gist with Multi File Successfully', () => {
 
+      cy.get(createGistsPage.description).type("Description 1");
+      cy.get(createGistsPage.contentName).type("Content 1");
+      cy.get(createGistsPage.editor).type('This Gist Created by Cypress Automation');
+
+      cy.get(".js-add-gist-file.btn.float-left").click();
+      cy.get(':nth-child(4) > .js-upload-markdown-image > .js-file > .commit-create > :nth-child(1) > .CodeMirror > .CodeMirror-scroll').type('Second Content')
+       cy.contains("button", "Create secret gist").click();
+
+      cy.url().should("include", createGistsPage.githubUserName);
+
+  // Check if Gist creation succeeded
+      cy.contains("a", "Content 1")
+        .should("be.visible")
+        .and("have.attr", "href")
+        .and("includes", createGistsPage.githubUserName);
+
+      cy.contains(
+      'span[title="Only those with the link can see this gist."]',
+      "Secret",
+      ).should("be.visible");
+
+
+  }); 
     it('Should Create a Gist By using Drag and Drop Successfully', ()=> {
         const randomNumber = Math.floor(Math.random() * 1001); 
 
