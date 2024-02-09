@@ -252,6 +252,8 @@ it("401 Unauthorized failed - Should NOT Create a Gist Successfully For non-auth
 
 })
 
+
+// Can be post condition
 function deleteGistTest(gistId, token) {
 
 
