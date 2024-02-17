@@ -1,9 +1,9 @@
 # GitHubGistsCypressTestAutomation
 These tests simulate typical user interactions with both the Gist UI application and its API.
 
-### How Can You Create a Cypress Project?
+### How Can You Create a New Cypress Project?
 
-1. Install home brew (if you prefer):
+1. Install homebrew (if you prefer):
 
 ` /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" `
 
@@ -39,7 +39,6 @@ These tests simulate typical user interactions with both the Gist UI application
 
 
 
-### Project Description 
 
 ### Setup and Run
 
@@ -47,7 +46,7 @@ These tests simulate typical user interactions with both the Gist UI application
 
 2. Clone this repo to your device.
 
-3. Install home brew (if you prefer):
+3. Install homebrew (if you prefer):
 
 ` /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" `
 
@@ -57,13 +56,13 @@ These tests simulate typical user interactions with both the Gist UI application
 
 5. Install project dependencies:
 
-`yarn install`
+`npm install`
 
-6. Create a file named "cypress.env.json" and fill your github credentials such as "cypress.example.env.json"
+6. Create a file named "cypress.env.json" and fill in your GitHub credentials such as "cypress.example.env.json"
 
 7. Run all tests interactively:
 
-`yarn cypress`
+`npx cypress open`
 
 
 ### The packages
@@ -73,4 +72,4 @@ These tests simulate typical user interactions with both the Gist UI application
 
 
 ## Helpful Extension
-I am using SelectorsHub for finding the ui elements.
+I am using SelectorsHub to find the UI elements.
