@@ -1,4 +1,4 @@
-# GitHubGistsCypressTestAutomation
+# GitHub Gists Cypress Test Automation
 These tests simulate typical user interactions with both the Gist UI application and its API.
 
 ### How Can You Create a New Cypress Project?
